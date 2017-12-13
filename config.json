@@ -1,0 +1,59 @@
+{
+	"marketValueRoutine":  {
+		"getMarketValueFunction" :"get_market_value",
+		"marketValueUrls" : [
+			"http://api.poe.ninja/api/Data/GetUniqueArmourOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetUniqueWeaponOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetDivinationCardsOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetUniqueFlaskOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetUniqueJewelOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetUniqueAccessoryOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetProphecyOverview?league=Hardcore%20Harbinger",
+            "http://api.poe.ninja/api/Data/GetUniqueMapOverview?league=Hardcore%20Harbinger"
+            ]
+	},
+
+	"statsRoutine": {
+		"getStatsFunction": "get_stats",
+		"utl_api": "http://www.pathofexile.com/api/public-stash-tabs?id=",
+		"stats_url": "http://api.poe.ninja/api/Data/GetStats",
+		"id_name": "next_change_id"
+	},
+
+	"findItemsRoutine": {
+		"itemCriticalCriterias": [
+			{
+				"criteriaName": "league",
+				"criteriaValue": "Hardcore Harbinger"
+			}
+		],
+		"forbiddenNames" : [
+			"Atziri's Splendour",
+			"Doryani's Invitation",
+			"Kaom's Root",
+			"Piscator's Vigil",
+			"Voll's Vision",
+			"Vessel of Vinktar",
+			"Divinarius",
+			"Kintsugi",
+			"Allelopathy",
+			"Cherrubim's Maleficence" ,
+			"Realm Ender",
+			"Karui Charge",
+			"Edge of Madness",
+			"Ngamahu Tiki",
+			"Abyssus",
+			"First Piece of Directions" ,
+			"Vessel of Vinktar",
+			"Second Piece of Directions",
+			"Fourth Piece of Focus",
+			"The Fracturing Spinner",
+			"Izaro's Turmoil"
+		]
+	},
+
+	"dataSetupSequence" : [
+		"marketValueRoutine",
+		"statsRoutine"
+	]
+}
