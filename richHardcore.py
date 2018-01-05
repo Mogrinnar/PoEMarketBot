@@ -46,10 +46,10 @@ def find_items(market_db, stashes):
         # log("{}, {}, {} items".format(character_name, stash_name, len(items)))
 
         # todo: compare number of unique items found (frameType) with number of priced items
-        log("amount of items {}".format(len(items)))
+        # log("amount of items {}".format(len(items)))
         for item in items:
             # discard any non-league stash
-            if item.get('league') != 'Hardcore Harbinger':
+            if item.get('league') != u'Hardcore Abyss':
                 continue
 
             # define some variables used to compare with poe.ninja
@@ -84,9 +84,10 @@ def find_items(market_db, stashes):
 
                 # PCJ - 9/6/2017
                 socket_link_amount = 0
-                for item_socket in item_sockets:
-                    if(item_socket['group'] == 0):
-                        socket_link_amount = socket_link_amount+1
+                if hasattr(item_sockets, 'item_socket'): # PCJ - 1/5/2018
+                    for item_socket in item_sockets:
+                        if(item_socket['group'] == 0):
+                            socket_link_amount = socket_link_amount+1
 
                 item_market_value = search_market_value(market_db, item_name, item_frame_type, item_type_line, socket_link_amount)
 
@@ -98,97 +99,58 @@ def find_items(market_db, stashes):
 
                     if perc_decrease >= 50:
                         priceInt = int(item_price)
-                        poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
+                        poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
                         pyperclip.copy(poe)
-                        log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
+                        log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
                         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
                         #pprint(item)
                     elif perc_decrease >= 30:
                         priceInt = int(item_price)
-                        poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
+                        poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
                         pyperclip.copy(poe)
-                        log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
+                        log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
                         winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
                     elif perc_decrease >= 20:
                     	priceInt = int(item_price)
-                    	poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
+                    	poe = "@{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {})".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'))
                     	pyperclip.copy(poe)
-                    	log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Harbinger (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
+                    	log("->>> @{} Hi, I would like to buy your {} listed for {} chaos in Hardcore Abyss (stash tab \"{}\"; position: left {}, top {}) , market_value: {} -{}%, corrupted: {}".format(character_name, item_name, priceInt, stash_name, item.get('x'), item.get('y'), item_market_value, round(perc_decrease), corrupted))
                     	winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
-
 
 
 def log(txt):
     print("[{}] {}".format(str(datetime.now().strftime('%H:%M:%S.%f')),txt))
-
-def get_market_value():
-    log("Pulling market price from poe.ninja...")
-    items = []
-    urls = ["http://api.poe.ninja/api/Data/GetUniqueArmourOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueWeaponOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetDivinationCardsOverview?league=Hardcore%20Harbinger",
-            #"http://api.poe.ninja/api/Data/GetMapOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueFlaskOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueJewelOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueAccessoryOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetProphecyOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueMapOverview?league=Hardcore%20Harbinger"
-            ]
-
-    for url in urls:
-        log("Pulling {} ...".format(url))
-        r = requests.get(url)
-
-        for item in r.json().get('lines'):
-            items.append(item)
-
-    log("Pulled prices from {} items price for poe.ninja".format(len(items)))
-
-    return items
 
 def main():
 
     with open('./config.json') as data_file:
         droneData = json.load(data_file)
 
-    marketValueRoutine = droneData.get("marketValueRoutine")
-
-    method_to_call = getattr(tools, marketValueRoutine.get("getMarketValueFunction"))
-    method_attributes = marketValueRoutine.get("marketValueUrls")
-
     log("Starting...")
 
     ### MARKET VALUE
-    items_market_db = get_market_value()
-    method_to_call(method_attributes)
+    market_value_routine = droneData.get("marketValueRoutine")
+    method_to_call = getattr(tools, market_value_routine.get("getMarketValueFunction"))
+    method_attributes = market_value_routine.get("marketValueUrls")
+    items_market_db = method_to_call(method_attributes)
     ### MARKET VALUE END
 
     ### STATS
-    url_api = "http://www.pathofexile.com/api/public-stash-tabs?id="
-    # get a starting point for next_change_id
-    r = requests.get("http://api.poe.ninja/api/Data/GetStats")
-    next_change_id = r.json().get('next_change_id')
-    next_change_id = str(next_change_id)
+    stats_routine = droneData.get("statsRoutine")
+    stats_method = getattr(tools, stats_routine.get("getStatsFunction"))
+    url_api = stats_routine.get('url_api')
+    next_change_id = stats_method(stats_routine)
     ### STATS END
-
-    log("Skipping 10 next_change_id")
-
-    for _ in range(5):
-       params = {'id': next_change_id}
-       r = requests.get(url_api, params=params)
-       data = r.json()
-       log("{} - {}".format(next_change_id, humanize.naturalsize(len(r.content))))
-       next_change_id = data['next_change_id']
 
     log("Ready to go.")
     while True:
         start_time = time.time()
 
         params = {'id': next_change_id}
-        r = requests.get(url_api, params = params)
+        request_result = requests.get(url_api, params = params)
 
         ## parsing structure
-        data = r.json()
+        data = request_result.json()
 
         ## setting next change id
         next_change_id = data['next_change_id']

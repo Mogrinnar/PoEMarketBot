@@ -1,22 +1,26 @@
 {
+	"settings": {
+		"verbose": false
+	},
+
 	"marketValueRoutine":  {
 		"getMarketValueFunction" :"get_market_value",
 		"marketValueUrls" : [
-			"http://api.poe.ninja/api/Data/GetUniqueArmourOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueWeaponOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetDivinationCardsOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueFlaskOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueJewelOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueAccessoryOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetProphecyOverview?league=Hardcore%20Harbinger",
-            "http://api.poe.ninja/api/Data/GetUniqueMapOverview?league=Hardcore%20Harbinger"
+			"http://api.poe.ninja/api/Data/GetUniqueArmourOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetUniqueWeaponOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetDivinationCardsOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetUniqueFlaskOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetUniqueJewelOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetUniqueAccessoryOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetProphecyOverview?league=Hardcore%20Abyss",
+            "http://api.poe.ninja/api/Data/GetUniqueMapOverview?league=Hardcore%20Abyss"
             ]
 	},
 
 	"statsRoutine": {
 		"getStatsFunction": "get_stats",
-		"utl_api": "http://www.pathofexile.com/api/public-stash-tabs?id=",
-		"stats_url": "http://api.poe.ninja/api/Data/GetStats",
+		"url_api": "http://www.pathofexile.com/api/public-stash-tabs?id=",
+		"url_stats": "http://api.poe.ninja/api/Data/GetStats",
 		"id_name": "next_change_id"
 	},
 
