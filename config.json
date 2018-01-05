@@ -25,12 +25,9 @@
 	},
 
 	"findItemsRoutine": {
-		"itemCriticalCriterias": [
-			{
-				"criteriaName": "league",
-				"criteriaValue": "Hardcore Harbinger"
-			}
-		],
+		"findItemsRoutineFunction": "find_items",
+		"itemCriticalCriteriaName": "league",
+		"itemCriticalCriteriaValue": "Hardcore Abyss",
 		"forbiddenNames" : [
 			"Atziri's Splendour",
 			"Doryani's Invitation",
@@ -52,7 +49,19 @@
 			"Second Piece of Directions",
 			"Fourth Piece of Focus",
 			"The Fracturing Spinner",
-			"Izaro's Turmoil"
+			"Izaro's Turmoil",
+			"Drillneck",
+			"The Snowblind Grace",
+			"The Dark Seer",
+			"The Wise Oak",
+			"The Signal Fire",
+			"The Bringer of Rain",
+			"Hrimburn",
+			"Doomfletc's Prism",
+			"Touch of Anguish",
+			"Tulfall",
+			"Kikazaru",
+			"The Vertex"
 		]
 	},
 
