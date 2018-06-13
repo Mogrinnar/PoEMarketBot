@@ -1,21 +1,30 @@
-import time
-import requests
+import json
 import re
 import sys
-from termcolor import colored, cprint
-from pprint import pprint
-import ujson
+import time
+import winsound
 from datetime import datetime
+from pprint import pprint
+
+import requests
+
 import humanize
 import pyperclip
-import winsound
-import json
 import tools
-
-requests.models.json = ujson
+from termcolor import colored, cprint
 
 # stashes is from "http://www.pathofexile.com/api/public-stash-tabs?id="
 # market_db is from por ninja
+
+def safe_json(request_result):
+    try:
+        json_object = request_result.json()
+    except ValueError as e:
+        log("ValueError when getting json")
+        log(e)
+        return False
+    else:
+        return json_object
 
 
 def log(txt):
@@ -53,7 +62,10 @@ def main():
         request_result = requests.get(url_api, params = params)
 
         ## parsing structure
-        data = request_result.json()
+        ##data = request_result.json()
+        data = safe_json(request_result)
+        if not data:
+            continue
 
         ## setting next change id
         next_change_id = data['next_change_id']
