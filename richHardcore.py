@@ -32,7 +32,7 @@ def log(txt):
 
 def main():
 
-    with open('./config.json') as data_file:
+    with open('./config.json', encoding='utf-8') as data_file:
         droneData = json.load(data_file)
 
     log("Starting...")
